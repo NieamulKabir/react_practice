@@ -1,6 +1,7 @@
-import { useFieldArray, useForm } from "react-hook-form";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 import FieldSet from "../components/FieldSet";
 import Field from "../components/Field";
+import NumberInput from "../components/NumberInput";
 
 const RegistrationForm = () => {
   const {
@@ -24,6 +25,16 @@ const RegistrationForm = () => {
     <div className="flex flex-col justify-center items-center">
       <form onSubmit={handleSubmit(submitForm)}>
         <FieldSet label="Enter Basic Details">
+          <Field label="Picture" error={errors.picture}>
+            <input
+              {...register("picture", {
+                required: "Picture is required",
+              })}
+              type="file"
+              id="picture"
+              name="picture"
+            />
+          </Field>
           <Field label="Full Name" error={errors.fName}>
             <input
               {...register("fName", { required: "Full Name is required" })}
@@ -38,21 +49,25 @@ const RegistrationForm = () => {
           </Field>
 
           <Field label="Age" error={errors.age}>
-            <input
-              {...register("age", {
-                required: "Age is required",
+            <Controller
+              name="age"
+              control={control}
+              defaultValue={1}
+              render={({ field: { ref, ...field } }) => (
+                <NumberInput
+                  id="age"
+                  className={`p-2 border box-border w-full rounded-md ${
+                    errors.age ? "border-red-500" : "border-gray-500"
+                  }`}
+                  {...field}
+                />
+              )}
+              rules={{
                 max: {
                   value: 100,
-                  message: "Age must be between 0 and 100",
+                  message: "Age can be between 0 and 100",
                 },
-              })}
-              className={`p-2 border box-border w-[300px] rounded-md ${
-                errors.age ? "border-red-500" : "border-gray-500"
-              }`}
-              type="number"
-              name="age"
-              id="age"
-              placeholder="Enter Your Age"
+              }}
             />
           </Field>
 
