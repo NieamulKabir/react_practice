@@ -1,13 +1,14 @@
-import Field from "./Field";
-import FieldSet from "./FieldSet";
+
 import { useForm } from "react-hook-form";
+import FieldSet from "../components/FieldSet";
+import Field from "../components/Field";
 
 const LoginForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setError
+    setError,
   } = useForm();
 
   const submitForm = (formData) => {
@@ -15,14 +16,15 @@ const LoginForm = () => {
     const user = { email: "x@example.com", password: "12345678" };
     const found =
       formData.email === user.email && formData.password === user.password;
-      if (!found) {
-        setError("root.random",{
-            message
-        })
-      }
+    if (!found) {
+      setError("root.random", {
+        message: `User With email '${formData.email}' is not found`,
+        type: "random",
+      });
+    }
   };
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center">
       <form onSubmit={handleSubmit(submitForm)}>
         <FieldSet label="Enter Login Details">
           <Field label="Email" error={errors.email}>
@@ -57,9 +59,7 @@ const LoginForm = () => {
             />
           </Field>
         </FieldSet>
-        <div>
-
-        </div>
+        <div>{errors?.root?.random.message}</div>
         <Field>
           <button className="text-md text-white cursor-pointer p-1 border rounded-lg  bg-purple-500 ml-2">
             Login
