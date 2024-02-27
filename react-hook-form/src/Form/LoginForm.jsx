@@ -1,4 +1,3 @@
-
 import { useForm } from "react-hook-form";
 import FieldSet from "../components/FieldSet";
 import Field from "../components/Field";
@@ -61,7 +60,7 @@ const LoginForm = () => {
         </FieldSet>
         <div>{errors?.root?.random.message}</div>
         <Field>
-          <button className="text-md text-white cursor-pointer p-1 border rounded-lg  bg-purple-500 ml-2">
+          <button className="text-md text-white cursor-pointer p-1 border rounded-lg bg-purple-500 m-auto">
             Login
           </button>
         </Field>

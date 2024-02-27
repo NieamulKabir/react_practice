@@ -1,10 +1,12 @@
-import LoginForm from "./Form/LoginForm";
+// import LoginForm from "./Form/LoginForm";
 
+import RegistrationForm from "./Form/RegistrationForm";
 
 function App() {
   return (
     <>
-      <LoginForm />
+      {/* <LoginForm /> */}
+      <RegistrationForm />
     </>
   );
 }
